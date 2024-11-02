@@ -119,7 +119,7 @@ const LoginDialog = () => {
 
 
     return (
-        <Dialog open={true} PaperProps={{ sx: dialogStyle }}>
+        <Dialog open={true} PaperProps={{ sx: dialogStyle }} hideBackdrop={true}>
             <Component>
                 <Container>
                     <WaDesktop src={image1} alt="wa-whats-app" />
