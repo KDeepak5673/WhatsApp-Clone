@@ -1,21 +1,45 @@
 
 
-// import { GoogleOAuthProvider } from '@react-oauth/google';
+import PhonePage from "./components/account/Phonepage"
 
+
+
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 //Component
 import Messenger from "./components/Messenger";
 
-function App() {
+const App = () => {
+  
+  const Layout = () => {
+    return (
+      <div className="app">
+        <Outlet/>
+      </div>
+    );
+  };
 
-  // const clientId = '363975543480-b19ujq3ho6igccluhfne7e91fhhp8vvj.apps.googleusercontent.com';
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/" ,
+          element: <Messenger />,
+        
+        },
+        {
+          path: "/login", 
+          element: <PhonePage />,
+        }
+        
+      ],
+    },
+  ]);        
+  
+  return <RouterProvider router={router} />;
 
-  return (
-    <div >
-      <Messenger/>
-      
-    </div>
-  );
-}
+};
 
 export default App;

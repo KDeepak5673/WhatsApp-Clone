@@ -1,6 +1,8 @@
 
 
 import { Dialog, Box, Typography, styled, Button, List, ListItem } from "@mui/material";
+import { Link } from 'react-router-dom';
+
 import logo from '../../constants/qrcode.jpg';
 import image1 from '../../constants/Image1.png';
 
@@ -97,7 +99,7 @@ display: flex;
 flexWrap: "wrap"
 `
 
-const Link = styled(Button)`
+const LinkPhone = styled(Button)`
     color: #00a884;
 `
 
@@ -116,6 +118,10 @@ const dialogStyle = {
 
 const LoginDialog = () => {
 
+    
+
+
+
 
 
     return (
@@ -129,7 +135,7 @@ const LoginDialog = () => {
                     <Typography variant="subtitle2">Get calling, screen sharing and a faster experience with the new Windows app.</Typography>
                 </Container2>
                 <Container3>
-                    <Getapp variant="contained">Get the app</Getapp>
+                    <Getapp variant="contained"  component={Link} to="/login">Get the app</Getapp>
                 </Container3>
 
             </Component>
@@ -150,8 +156,8 @@ const LoginDialog = () => {
             </Component2>
             <hr style={{ border: '1px solid #eae6df', width: '80%' }} />
             <Component3>
-
-                <Link variant="text">Link with phone number</Link>
+                
+                <LinkPhone variant="text" component={Link} to="/login">Link with phone number</LinkPhone>
 
             </Component3>
         </Dialog>
