@@ -1,3 +1,4 @@
+import { useContext } from "react";
 
 
 import { Dialog, Box, Typography, styled, Button, List, ListItem } from "@mui/material";
@@ -5,8 +6,10 @@ import { Link } from 'react-router-dom';
 
 import logo from '../../constants/qrcode.jpg';
 import image1 from '../../constants/Image1.png';
+import { AccountContext } from "../../context/AccountProvider";
 
-// import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -18,7 +21,6 @@ const Component = styled(Box)`
     justify-content: center; /* Centers horizontally */
     align-items: center;
 `;
-
 const Component2 = styled(Box)`
     display: flex;
     justify-content: space-between;
@@ -26,7 +28,6 @@ const Component2 = styled(Box)`
     margin: 10px 52px 20px;
     
 `;
-
 const Component3 = styled(Box)`
     display: flex;
     margin: 10px 52px 20px;
@@ -52,7 +53,9 @@ const StyledList = styled(List)`
         color: #4a4a4a;
     }
 `;
-
+const Container = styled(Box)`
+    padding: 24px 40px 20px 20px;
+`
 const Container2 = styled(Box)`
     padding: 24px 40px 20px 20px;
 
@@ -87,9 +90,7 @@ const WaDesktop = styled('img')({
 
 });
 
-const Container = styled(Box)`
-    padding: 24px 40px 20px 20px;
-`
+
 
 const Getapp = styled(Button)`
 background-color : #008069;
@@ -99,9 +100,7 @@ display: flex;
 flexWrap: "wrap"
 `
 
-const LinkPhone = styled(Button)`
-    color: #00a884;
-`
+
 
 const dialogStyle = {
     marginTop: '12%',
@@ -118,8 +117,19 @@ const dialogStyle = {
 
 const LoginDialog = () => {
 
-    
+    const { setAccount } = useContext(AccountContext);
 
+    const onLoginSucess = (res) => {
+        const decoded = jwtDecode(res.credential);
+        setAccount(decoded);
+        console.log(decoded)
+    }
+
+
+    const onLoginError = (res) => {
+        console.log('Login Failed' , res);
+
+    }
 
 
 
@@ -135,7 +145,7 @@ const LoginDialog = () => {
                     <Typography variant="subtitle2">Get calling, screen sharing and a faster experience with the new Windows app.</Typography>
                 </Container2>
                 <Container3>
-                    <Getapp variant="contained"  component={Link} to="/login">Get the app</Getapp>
+                    <Getapp variant="contained" component={Link} to="/login">Get the app</Getapp>
                 </Container3>
 
             </Component>
@@ -156,8 +166,13 @@ const LoginDialog = () => {
             </Component2>
             <hr style={{ border: '1px solid #eae6df', width: '80%' }} />
             <Component3>
+                <Box>
+                <GoogleLogin
+                    onSuccess={onLoginSucess}
+                    onError={onLoginError}
+                />
+                </Box>
                 
-                <LinkPhone variant="text" component={Link} to="/login">Link with phone number</LinkPhone>
 
             </Component3>
         </Dialog>
