@@ -44,16 +44,16 @@ const Messenger = () => {
 
         <Window>
             {
-                account ? 
-                <>
+                account ?
+                    <>
 
                         <Header>
-                            
+
                         </Header>
                         <ChatDialog />
                     </>
-                
-                
+
+
                     :
                     <>
 

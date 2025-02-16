@@ -131,9 +131,6 @@ const LoginDialog = () => {
 
     }
 
-
-
-
     return (
         <Dialog open={true} PaperProps={{ sx: dialogStyle }} hideBackdrop={true}>
             <Component>
